@@ -8,8 +8,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +27,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        try{
+            URL url = NetworkUtils.buildURLMatchHistory();
+            String mHistory = NetworkUtils.getResponseFromHttpUrl(new URL("https://api.fortnitetracker.com/v1/profile/account/573274ee-19a6-4772-b005-1c871474e67c/matches"));
+            Log.d("TAGGGG",mHistory);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
 
 
         /* Creates Menu button on the top left corner  */
