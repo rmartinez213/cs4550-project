@@ -56,14 +56,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-        //IMPLEMENT FUNCTION
-        URL url = NetworkUtils.buildURLMatchHistory();
+        //IMPLEMENT TEST FUNCTION
+        URL url = NetworkUtils.buildURLServerStatus();
         Log.d("TAG", url.toString());
 
         QueryTask task = new QueryTask();
         task.execute(url);
-
-
 
     }
 
