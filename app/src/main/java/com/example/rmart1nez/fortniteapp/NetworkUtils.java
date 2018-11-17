@@ -22,7 +22,7 @@ public class NetworkUtils {
     final static String endpointChallenges = "https://api.fortnitetracker.com/v1/challenges";
     final static String endpointNews = "https://fortnite-public-api.theapinetwork.com/prod09/br_motd/get";
     final static String endpointServerStatus = "https://fortnite-public-api.theapinetwork.com/prod09/status/fortnite_server_status";
-
+    final static String endpointLeakedItems = "https://fortnite-public-api.theapinetwork.com/prod09/upcoming/get";
 
     //QUERY and VALUES
     final static String key = "TRN-Api-Key";
@@ -185,6 +185,29 @@ public class NetworkUtils {
         return url;
     }
 
+    /*****************************/
+    /****Leaked Items Endpoint****/
+    /*****************************/
+
+    public static URL buildURLLeakedItems(){
+
+
+        Uri builtUri = Uri.parse(endpointLeakedItems).buildUpon()
+                .build();
+
+
+        URL url = null;
+
+        try{
+            url = new URL(builtUri.toString());
+
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
+        Log.d("TAG", url.toString());
+        return url;
+    }
 
 
 

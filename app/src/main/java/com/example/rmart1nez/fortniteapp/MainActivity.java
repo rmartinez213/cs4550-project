@@ -47,26 +47,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         /* if we see our activity for the first time  */
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
 
-        /* Display main screen window when application loads */
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlayerStats()).commit();
-        navigationView.setCheckedItem(R.id.nav_player_stats);
+            /* Display main screen window when application loads */
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlayerStats()).commit();
+            navigationView.setCheckedItem(R.id.nav_player_stats);
 
         }
 
-
         //IMPLEMENT TEST FUNCTION
-        URL url = NetworkUtils.buildURLServerStatus();
+        URL url = NetworkUtils.buildURLLeakedItems();
         Log.d("TAG", url.toString());
 
         QueryTask task = new QueryTask();
         task.execute(url);
 
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
 
         /* Finds out which item was clicked */
         switch (menuItem.getItemId()) {
@@ -90,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new News()).commit();
                 break;
 
+            case R.id.nav_leaked_items:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeakedItems()).commit();
+                break;
+
             case R.id.nav_server_status:
                 Toast.makeText(this, "INSERT SERVER STATUS HERE", Toast.LENGTH_SHORT).show();
         }
@@ -101,11 +106,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed(){
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -114,19 +118,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public class QueryTask extends AsyncTask<URL, Void, String> {
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected String doInBackground(URL...urls){
+        protected String doInBackground(URL... urls) {
 
 
             String challengesText = "";
 
-            try{
+            try {
                 challengesText = NetworkUtils.getResponseFromHttpUrl(urls[0]);
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         @Override
-        protected void onPostExecute(String s){
+        protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.d("TAG POST EXECUTE", s);
         }

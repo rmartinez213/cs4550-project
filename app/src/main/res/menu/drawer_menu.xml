@@ -31,6 +31,11 @@
             android:icon="@drawable/ic_news"
             android:title="News" />
 
+        <item
+            android:id="@+id/nav_leaked_items"
+            android:icon="@drawable/ic_leaked_items"
+            android:title="Leaked Items" />
+
     </group>
 
     <item android:title="Services">
