@@ -87,11 +87,7 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
 
-//        urlConnection.setRequestProperty("TRN-Api-Key", "1db07a64-64ab-4c8c-9caa-97b4f81ae5d3");
-//        urlConnection.setRequestMethod("GET");
-//        urlConnection.setUseCaches(false);
-//        urlConnection.setDoInput(true);
-//        urlConnection.setDoOutput(true);
+        urlConnection.setRequestProperty("TRN-Api-Key", "1db07a64-64ab-4c8c-9caa-97b4f81ae5d3");
 
 
         try{
