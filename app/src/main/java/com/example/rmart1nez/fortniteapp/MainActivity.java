@@ -1,5 +1,6 @@
 package com.example.rmart1nez.fortniteapp;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,16 +30,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
 
-        try{
-            URL url = NetworkUtils.buildURLMatchHistory();
-            String mHistory = NetworkUtils.getResponseFromHttpUrl(new URL("https://api.fortnitetracker.com/v1/profile/account/573274ee-19a6-4772-b005-1c871474e67c/matches"));
-            Log.d("TAGGGG",mHistory);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-
-
         /* Creates Menu button on the top left corner  */
         drawer = findViewById(R.id.drawer_layout);
 
@@ -63,6 +54,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(R.id.nav_player_stats);
 
         }
+
+
+        //IMPLEMENT FUNCTION
+        URL url = NetworkUtils.buildURLMatchHistory();
+        Log.d("TAG", url.toString());
+
+        QueryTask task = new QueryTask();
+        task.execute(url);
+
+
+
     }
 
     @Override
@@ -109,4 +111,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
+    public class QueryTask extends AsyncTask<URL, Void, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(URL...urls){
+
+
+            String challengesText = "";
+
+            try{
+                challengesText = NetworkUtils.getResponseFromHttpUrl(urls[0]);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+            return challengesText;
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+            Log.d("TAG POST EXECUTE", s);
+        }
+    }
 }
+
+
+

@@ -70,10 +70,7 @@ public class NetworkUtils {
         URL url = null;
 
         try{
-            //url = new URL(builtUri.toString());
-
-            url =  new URL("https://api.fortnitetracker.com/v1/profile/account/573274ee-19a6-4772-b005-1c871474e67c/matches");
-
+            url = new URL(builtUri.toString());
 
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -90,22 +87,12 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
 
-//        String credentials = PARAM_APIKEY + ":" + apiKey;
-//        String basicAuth = "Basic " + new String(java.util.Base64.getEncoder().encode(credentials.getBytes()));
-
-
-
-//        urlConnection.setRequestProperty("Content-Type", "application/json");
-          urlConnection.setRequestProperty("TRN-Api-Key", "1db07a64-64ab-4c8c-9caa-97b4f81ae5d3");
+//        urlConnection.setRequestProperty("TRN-Api-Key", "1db07a64-64ab-4c8c-9caa-97b4f81ae5d3");
 //        urlConnection.setRequestMethod("GET");
-        urlConnection.setUseCaches(false);
-        urlConnection.setDoOutput(true);
+//        urlConnection.setUseCaches(false);
+//        urlConnection.setDoInput(true);
+//        urlConnection.setDoOutput(true);
 
-
-        //urlConnection.setRequestProperty("Authorization", basicAuth);
-        //urlConnection.setRequestMethod("GET");
-
-        String Test = "TESTING HERE";
 
         try{
             InputStream in = urlConnection.getInputStream();
@@ -115,16 +102,14 @@ public class NetworkUtils {
 
             boolean hasInput = scanner.hasNext();
 
-            if(hasInput) {
-                Log.d("TEST", Test);
+            if(hasInput)
                 return scanner.next();
-            }
+
 
             else
                 return null;
         } finally {
             urlConnection.disconnect();
         }
-
     }
 }
