@@ -15,11 +15,15 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+
+    //ItemShopArrayList
+    private ArrayList<ItemShopAL> ItemShopArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         //IMPLEMENT TEST FUNCTION
-        URL url = NetworkUtils.buildURLLeakedItems();
-        Log.d("TAG", url.toString());
-
-        QueryTask task = new QueryTask();
-        task.execute(url);
+//        URL url = NetworkUtils.buildURLLeakedItems();
+//
+//        QueryTask task = new QueryTask();
+//        task.execute(url);
 
 
     }
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_item_shop:
+                URL url = NetworkUtils.buildURLMatchItemShop();
+                QueryTaskItemShop task = new QueryTaskItemShop();
+                task.execute(url);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ItemShop()).commit();
                 break;
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public class QueryTask extends AsyncTask<URL, Void, String> {
+    public class QueryTaskItemShop extends AsyncTask<URL, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -134,16 +141,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 e.printStackTrace();
             }
 
+
             return challengesText;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            ItemShopArrayList = JsonUtilsItemShop.parseItemShop(s);
+            //ItemShopAdapter =
+
             Log.d("TAG POST EXECUTE", s);
         }
     }
 }
-
-
-
