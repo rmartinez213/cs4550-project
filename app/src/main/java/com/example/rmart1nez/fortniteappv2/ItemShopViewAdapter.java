@@ -82,7 +82,7 @@ public class ItemShopViewAdapter extends RecyclerView.Adapter<ItemShopViewAdapte
             name.setText(itemShopALS.get(listIndex).getName());
             rarity.setText(itemShopALS.get(listIndex).getRarity());
             storeCategory.setText(itemShopALS.get(listIndex).getStoreCategory());
-            vBucks.setText(itemShopALS.get(listIndex).getvBucks() + "");
+            vBucks.setText(itemShopALS.get(listIndex).getvBucks() + " vBucks");
 
 
         }
