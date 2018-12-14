@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private List<PlayerStatsAL> playerStats = new ArrayList<>();
 
     private DrawerLayout drawer;
 
@@ -56,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         //IMPLEMENT TEST FUNCTION
-        URL url = NetworkUtils.buildURLLeakedItems();
-        Log.d("TAG", url.toString());
-
-        QueryTask task = new QueryTask();
-        task.execute(url);
+//        URL url = NetworkUtils.buildURLNews();
+//        Log.d("newTAG", url.toString());
+//
+//        QueryTask task = new QueryTask();
+//        task.execute(url);
 
 
     }
@@ -73,6 +77,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_player_stats:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlayerStats()).commit();
+
+                QueryTask task = new QueryTask();
+                URL urlStats = NetworkUtils.buildURLStats();
+
+                task.execute(urlStats);
+                Log.d("MYSTATS", urlStats.toString());
+                //JSONPlayerUtils.parseNews(); //NOT NEEDED
+
+
                 break;
 
             case R.id.nav_match_history:
@@ -129,7 +142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String challengesText = "";
 
             try {
+                Log.d("Prior", "Before response");
                 challengesText = NetworkUtils.getResponseFromHttpUrl(urls[0]);
+                //Log.d("TEMPS ", challengesText);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,10 +155,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("TAG POST EXECUTE", s);
+
+            playerStats = JSONPlayerUtils.parseNews(s);
+
+            //Log.d("TAG POST EXECUTE", s);
         }
     }
 }
+
 
 
 
