@@ -13,6 +13,7 @@ android:layout_height="match_parent"
         android:hint="Enter a query, then click Search"
         android:textSize="22sp" />
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news_recyclerview"
         android:scrollbars="vertical"
