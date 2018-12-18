@@ -25,7 +25,6 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-        //mSearchResultsTextView = (TextView) findViewById(R.id.date);
         mRecyclerView = (RecyclerView)findViewById(R.id.news_recyclerview);
         itemShopViewAdapter = new ItemShopViewAdapter(this, itemShopAL);
         mRecyclerView.setAdapter(itemShopViewAdapter);
