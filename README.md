@@ -15,4 +15,4 @@ The news will feature all of the news that is currently in the Fortnite announce
 Contributors:
 Robert Martinez
 Miguel Cayetano
-Roi Chico
+Roi Chico 
