@@ -12,7 +12,4 @@ The item shop feature will allow users to view the current item shop. It will al
 News:
 The news will feature all of the news that is currently in the Fortnite announcements. 
 
-Contributors:
-Robert Martinez
-Miguel Cayetano
-Roi Chico 
+Contributors: Robert Martinez, Miguel Cayetano, Roi Chico
